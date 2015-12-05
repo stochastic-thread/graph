@@ -8,11 +8,6 @@ defmodule Graph do
 		|> Agent.start_link
 	end
 
-	# gets the underlying :digraph
-	def get(pid) do
-		Agent.get(pid, fn x -> x end)
-	end
-
 	# new - client creates an Agent holding a :digraph
 	def new do
 		case init do
@@ -25,6 +20,7 @@ defmodule Graph do
 		end
 	end
 
+	# new! - get the pid and not a status tuple
 	def new! do
 		case init do
 			{:ok, _pid} 
@@ -34,11 +30,28 @@ defmodule Graph do
 		end
 	end
 
+	def vertices(pid) do
+		Agent.get pid, fn x -> :digraph.vertices x end
+	end
+
 	def add_vertex(pid) do
 		Agent.get pid, fn x -> :digraph.add_vertex x end
 	end
 
-	def vertices(pid) do
-		Agent.get pid, fn x -> :digraph.vertices x end
+	def add_vertex(pid, k) do
+		Agent.get pid, fn x -> :digraph.add_vertex x, k end
 	end
+
+	def add_vertex(pid, k, v) do
+		Agent.get pid, fn x -> :digraph.add_vertex(x, k, v) end
+	end
+
+	def edges(pid) do
+		Agent.get pid, fn x -> :digraph.edges x end
+	end
+
+	def add_edge(pid, ek, v1k, v2k, ev) do
+		Agent.get pid, fn x -> :digraph.add_edge(pid, ek, v1k, v2k, ev) end
+	end
+
 end
