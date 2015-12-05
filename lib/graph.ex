@@ -19,8 +19,8 @@ defmodule Graph do
         {:ok, pid}
       {:error, error} -> 
         {:error, error}
-			anything_else -> 
-				{:unknown_error, anything_else}
+      anything_else -> 
+        {:unknown_error, anything_else}
     end
   end
 
@@ -79,7 +79,7 @@ defmodule Graph do
       fn graph ->
         case :digraph.edge(graph, key) do
           {x, y} -> y
-          other_msg -> other_msg
+          tuple -> tuple |> Tuple.to_list |> Enum.fetch! 3
         end
       end 
     )
@@ -94,15 +94,9 @@ defmodule Graph do
   end
 
 
-  ###################################################################
-  # show/1
-  # 
-  # notes - for graphical view of vertices/edges
-  #         also debugging
-  
+  ############ Other functions #######################################
   def show(g) do
     Enum.each(Graph.vertices(g), fn(v) -> IO.inspect Graph.vertex(g, v) end)
     Enum.each(Graph.edges(g), fn(e) -> IO.inspect Graph.edge(g, e) end)
   end
-
 end

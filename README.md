@@ -43,4 +43,26 @@ iex(6)> Graph.show g
 {:m, %{name: "Martina Miller"}}
 {:a, %{name: "Arthur Colle"}}
 {:edge1, :a, :m, %{status: "Met Once"}}
+
+iex(1)> graph = Graph.new!
+#PID<0.95.0>
+iex(2)> graph |> Graph.add_vertex 1, %{data: "arthur colle"}
+1
+iex(3)> graph |> Graph.add_vertex 2, %{data: "sophie colle"}
+2
+iex(4)> graph |> Graph.vertices
+[1, 2]
+iex(5)> graph |> Graph.show
+{1, %{data: "arthur colle"}}
+{2, %{data: "sophie colle"}}
+:ok
+iex(6)> Graph.edges(graph)
+[]
+iex(7)> Graph.add_edge(graph, :a, 1, 2, %{relationship: :siblings})
+:a
+
+iex(8)> Graph.edge! graph, :a
+%{relationship: :siblings}
+
+
 ```
