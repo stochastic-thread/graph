@@ -7,7 +7,7 @@ defmodule Graph do
 	#				     holds its state with an agent
 
 	defp init do
-		Agent.start_link(fn -> :digraph.new end
+		Agent.start_link(fn -> :digraph.new end)
 	end
 
 
@@ -51,8 +51,8 @@ defmodule Graph do
 	# (public)
 	#
 
-	def vertices(pid) do
-		Agent.get(pid, fn(graph) -> :digraph.vertices(graph) end)
+	def vertices graph_pid do
+		Agent.get graph_pid, fn graph -> graph |> :digraph.vertices end
 	end
 
 
@@ -60,8 +60,8 @@ defmodule Graph do
 	# (public)
 	#
 
-	def add_vertex(graph_pid) do
-		Agent.get(graph_pid, fn graph -> :digraph.add_vertex(graph) end)
+	def add_vertex graph_pid do
+		Agent.get graph_pid, fn graph -> graph |> :digraph.add_vertex end
 	end
 
 
@@ -69,8 +69,8 @@ defmodule Graph do
 	# (public)
 	#
 
-	def add_vertex(graph_pid, key) do
-		Agent.get(graph_pid, fn graph -> :digraph.add_vertex(graph, key) end)
+	def add_vertex graph_pid, key do
+		Agent.get graph_pid, fn graph -> (graph |> :digraph.add_vertex key) end
 	end
 	
 
@@ -78,8 +78,8 @@ defmodule Graph do
 	# (public)
 	#
 	
-	def add_vertex(graph_pid, key, value) do
-		Agent.get(graph_pid, fn graph -> :digraph.add_vertex(graph, key, value) end)
+	def add_vertex graph_pid, key, value do
+		Agent.get graph_pid, fn graph ->  (graph |> :digraph.add_vertex key, value) end
 	end
 	
 
@@ -87,8 +87,8 @@ defmodule Graph do
 	# (public)
 	#
 	
-	def edges(graph_pid) do
-		Agent.get(graph_pid, fn graph -> :digraph.edges(graph) end)
+	def edges graph_pid do
+		Agent.get graph_pid, fn graph -> graph |> :digraph.edges end
 	end
 	
 
@@ -96,10 +96,11 @@ defmodule Graph do
 	# (public)
 	#
 	
-	def add_edge(graph_pid, edge_k, v1_k, v2_k, edge_v) do
+	def add_edge graph_pid, edge_k, v1_k, v2_k, edge_v do
 		Agent.get( graph_pid, 
 			fn graph -> 
-				:digraph.add_edge( graph, edge_k, v1_k, v2_k, edge_v) 
+        graph
+        |> :digraph.add_edge edge_k, v1_k, v2_k, edge_v
 			end
 		)
 	end
@@ -121,5 +122,31 @@ defmodule Graph do
 	def vertex(graph_pid, key) do
 		Agent.get( graph_pid, fn graph -> :digraph.vertex(graph, key) end )
 	end
+
+
+  ###################################################################
+  # (public)
+  #
+  # notes - just returns the value, not the {:key, :value} tuple
+  
+  def vertex!(graph_pid, key) do
+    Agent.get( graph_pid, 
+      fn graph ->
+        {x, y} = :digraph.vertex(graph, key) 
+        y
+      end 
+    )
+  end
+
+  ###################################################################
+  # (public)
+  #
+  # notes - for graphical view of vertices/edges
+  #         also debugging
+  
+  def show(g) do
+    Enum.each(Graph.vertices(g), fn(v) -> IO.inspect Graph.vertex(g, v) end)
+    Enum.each(Graph.edges(g), fn(e) -> IO.inspect Graph.edge(g, e) end)
+  end
 
 end
