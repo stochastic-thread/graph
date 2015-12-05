@@ -21,6 +21,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 
 
+
 ```
 Interactive Elixir (1.1.1) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)> g = Graph.new!
@@ -29,7 +30,7 @@ iex(1)> g = Graph.new!
 iex(2)> Graph.add_vertex g, :a, %{name: "Arthur Colle"}
 :a
 
-iex(3)> Graph.add_vertex g, :j, %{name: "Martina Miller"}
+iex(3)> Graph.add_vertex g, :m, %{name: "Martina Miller"}
 :m
 
 iex(4)> Graph.vertices g
