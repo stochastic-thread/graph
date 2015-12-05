@@ -19,7 +19,7 @@ defmodule Graph do
         {:ok, pid}
       {:error, error} -> 
         {:error, error}
-      anything_else -> 
+      anything_else ->
         {:unknown_error, anything_else}
     end
   end
@@ -38,15 +38,17 @@ defmodule Graph do
 
   ############ Vertex functions ################################
 
-  def vertex(graph_pid, key) do
-    Agent.get( graph_pid, fn graph -> :digraph.vertex(graph, key) end )
+  def vertex( graph_pid, key ) do
+    Agent.get( graph_pid, fn graph -> 
+      :digraph.vertex( graph, key ) 
+    end )
   end
 
   # notes - just returns the value, not the {:key, :value} tuple  
-  def vertex!(graph_pid, key) do
+  def vertex!( graph_pid, key ) do
     Agent.get( graph_pid, 
       fn graph ->
-        {x, y} = :digraph.vertex(graph, key) 
+        {_x, y} = :digraph.vertex( graph, key ) 
         y
       end 
     )
@@ -57,11 +59,11 @@ defmodule Graph do
   end
 
   def add_vertex graph_pid, key do
-    Agent.get graph_pid, fn graph -> (graph |> :digraph.add_vertex key) end
+    Agent.get graph_pid, fn graph -> ( graph |> :digraph.add_vertex key ) end
 	end
 	
 	def add_vertex graph_pid, key, value do
-		Agent.get graph_pid, fn graph ->  (graph |> :digraph.add_vertex key, value) end
+		Agent.get graph_pid, fn graph ->  ( graph |> :digraph.add_vertex key, value ) end
 	end
 	
   def vertices graph_pid do
