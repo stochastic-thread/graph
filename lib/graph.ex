@@ -7,7 +7,7 @@ defmodule Graph do
 	#				     holds its state with an agent
 
 	defp init do
-		Agent.start_link(fn -> :digraph.new end)
+		Agent.start_link(fn -> :digraph.new end
 	end
 
 
