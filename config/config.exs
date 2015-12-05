@@ -28,3 +28,7 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+config :graph,
+	enumerate_vertices: false # if this is set to false then you must specify an `id` when you create vertices
+	

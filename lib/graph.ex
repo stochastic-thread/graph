@@ -1,13 +1,19 @@
 defmodule Graph do
+
+	# Private helper functions
+	
+	# initializes the :digraph from otp, holds its state with an agent
 	defp init do
-		fn -> :digraph.new end
-		|> Agent.start_link name: __MODULE__
+		fn -> :digraph.new end 
+		|> Agent.start_link
 	end
 
-	defp get_graph do
-		Agent.get __MODULE__, fn _c -> _c end
+	# gets the underlying :digraph
+	def get(pid) do
+		Agent.get(pid, fn x -> x end)
 	end
 
+	# new - client creates an Agent holding a :digraph
 	def new do
 		case init do
 			{:ok, _pid} 
@@ -19,11 +25,20 @@ defmodule Graph do
 		end
 	end
 
-	def get do
-		get_graph
+	def new! do
+		case init do
+			{:ok, _pid} 
+				-> _pid
+			{:error, _else}
+				-> _else
+		end
 	end
 
-	def add_vertex vertex do
-		:digraph.add_vertex(get_graph, vertex)
+	def add_vertex(pid) do
+		Agent.get pid, fn x -> :digraph.add_vertex x end
+	end
+
+	def vertices(pid) do
+		Agent.get pid, fn x -> :digraph.vertices x end
 	end
 end
