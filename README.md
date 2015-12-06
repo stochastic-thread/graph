@@ -89,7 +89,8 @@ subgraph/3                    topsort/1
 
 To do from `:digraph`:
 
-`~~add_edge/3~~`           `~~add_edge/4~~`           `~~add_edge/5~~`
+~~`add_edge/3`~~           ~~`add_edge/4`~~           ~~`add_edge/5`~~ 
+
 ~~`add_vertex/1`~~         ~~`add_vertex/2`~~         ~~`add_vertex/3`~~
 ```
 del_edge/2           del_edges/2          del_path/3
