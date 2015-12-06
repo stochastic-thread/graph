@@ -49,7 +49,7 @@ iex(5)> Graph.show( graph )
 
 ```
 
-#To do from `:digraph_utils`:
+#To do from `:mdigraph_utils`:
 
 ```
 arborescence_root/1           components/1
@@ -64,7 +64,7 @@ strong_components/1           subgraph/2
 subgraph/3                    topsort/1
 ```
 
-#To do from `:digraph`:
+#To do from `:mdigraph`:
 ```
 del_edge/2           del_edges/2          del_path/3
 del_vertex/2         del_vertices/2       delete/1
@@ -77,7 +77,7 @@ no_edges/1           no_vertices/1        out_degree/2
 out_edges/2          out_neighbours/2     sink_vertices/1
 source_vertices/1    vertex/2             vertices/1
 ```
-#Done from `:digraph`:
+#Done from `:mdigraph`:
 ~~`add_edge/3`~~           
 ~~`add_edge/4`~~           
 ~~`add_edge/5`~~ 
@@ -90,7 +90,7 @@ source_vertices/1    vertex/2             vertices/1
 
 # Info for maintainers:
 
-## :digraph module functions
+## :mdigraph module functions
 ```
 add_edge(G, V1, V2) -> edge() | {error, add_edge_err_rsn()}
 add_edge(G, V1, V2, Label) -> edge() | {error, add_edge_err_rsn()}
@@ -126,7 +126,7 @@ vertex(G, V) -> {V, Label} | false
 vertices(G) -> Vertices
 ```
 
-## :digraph_utils module functions
+## :mdigraph_utils module functions
 ```
 arborescence_root(Digraph) -> no | {yes, Root}
 components(Digraph) -> [Component]
