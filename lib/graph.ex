@@ -59,11 +59,11 @@ defmodule Graph do
 
   def add_vertex graph_pid, key do
     Agent.get( graph_pid, fn graph -> :digraph.add_vertex( graph, key ) end )
-	end
+  end
 	
-	def add_vertex graph_pid, key, value do
-		Agent.get( graph_pid, fn graph -> :digraph.add_vertex( graph, key, value ) end )
-	end
+  def add_vertex graph_pid, key, value do
+    Agent.get( graph_pid, fn graph -> :digraph.add_vertex( graph, key, value ) end )
+  end
 	
   def vertices graph_pid do
     Agent.get( graph_pid, fn graph -> :digraph.vertices( graph ) end )
@@ -89,9 +89,9 @@ defmodule Graph do
     )
   end
 	
-	def add_edge graph_pid, edge_k, v1_k, v2_k, edge_v do
+  def add_edge graph_pid, edge_k, v1_k, v2_k, edge_v do
     Agent.get( graph_pid, fn( graph ) -> :digraph.add_edge( graph, edge_k, v1_k, v2_k, edge_v ) end )
-	end
+  end
 	
   def edges graph_pid do
     Agent.get( graph_pid, fn( graph ) -> :digraph.edges( graph ) end )
