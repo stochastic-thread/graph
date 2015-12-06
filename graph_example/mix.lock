@@ -1,0 +1,2 @@
+%{"blocking_queue": {:hex, :blocking_queue, "1.0.6"},
+  "graph": {:git, "http://github.com/arthurcolle/graph", "ef332e888036910de8e8b816f596ed01e97fe4a0", []}}

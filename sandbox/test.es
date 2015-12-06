@@ -1,7 +1,7 @@
 #!/usr/bin/env escript
 
 main(_Arg) ->
-        {ok,Ref}=dets:open_file("myfile.dat",[]),
+        {ok,Ref}=dets:open_file("myfile.datmn ",[]),
         io:format("The data file's info: ~p~n", [dets:info(Ref)] ),
 
         insert_dummy(Ref),
