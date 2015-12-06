@@ -92,10 +92,13 @@ To do from `:digraph`:
 ~~`add_edge/3`~~           ~~`add_edge/4`~~           ~~`add_edge/5`~~ 
 
 ~~`add_vertex/1`~~         ~~`add_vertex/2`~~         ~~`add_vertex/3`~~
+
+~~`edges/1`~~
+
 ```
 del_edge/2           del_edges/2          del_path/3
 del_vertex/2         del_vertices/2       delete/1
-edge/2               ~~`edges/1`~~        edges/2
+edge/2                       edges/2
 get_cycle/2          get_path/3           get_short_cycle/2
 get_short_path/3     in_degree/2          in_edges/2
 in_neighbours/2      info/1               module_info/0
