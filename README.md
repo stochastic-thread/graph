@@ -128,22 +128,22 @@ vertices(G) -> Vertices
 
 ## :mdigraph_utils module functions
 ```
-arborescence_root(Digraph) -> no | {yes, Root}
-components(Digraph) -> [Component]
-condensation(Digraph) -> CondensedDigraph
-cyclic_strong_components(Digraph) -> [StrongComponent]
-is_acyclic(Digraph) -> boolean()
-is_arborescence(Digraph) -> boolean()
-is_tree(Digraph) -> boolean()
-loop_vertices(Digraph) -> Vertices
-postorder(Digraph) -> Vertices
-preorder(Digraph) -> Vertices
-reachable(Vertices, Digraph) -> Reachable
-reachable_neighbours(Vertices, Digraph) -> Reachable
-reaching(Vertices, Digraph) -> Reaching
-reaching_neighbours(Vertices, Digraph) -> Reaching
-strong_components(Digraph) -> [StrongComponent]
-subgraph(Digraph, Vertices) -> SubGraph
-subgraph(Digraph, Vertices, Options) -> SubGraph
-topsort(Digraph) -> Vertices | false
+arborescence_root(Mdigraph) -> no | {yes, Root}
+components(Mdigraph) -> [Component]
+condensation(Mdigraph) -> CondensedMdigraph
+cyclic_strong_components(Mdigraph) -> [StrongComponent]
+is_acyclic(Mdigraph) -> boolean()
+is_arborescence(Mdigraph) -> boolean()
+is_tree(Mdigraph) -> boolean()
+loop_vertices(Mdigraph) -> Vertices
+postorder(Mdigraph) -> Vertices
+preorder(Mdigraph) -> Vertices
+reachable(Vertices, Mdigraph) -> Reachable
+reachable_neighbours(Vertices, Mdigraph) -> Reachable
+reaching(Vertices, Mdigraph) -> Reaching
+reaching_neighbours(Vertices, Mdigraph) -> Reaching
+strong_components(Mdigraph) -> [StrongComponent]
+subgraph(Mdigraph, Vertices) -> SubGraph
+subgraph(Mdigraph, Vertices, Options) -> SubGraph
+topsort(Mdigraph) -> Vertices | false
 ```
