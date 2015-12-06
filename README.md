@@ -1,6 +1,6 @@
 # Graph
 
-**Wrapper around Erlang's :digraph module**
+**High-performance, distributed graph library for Elixir**
 
 ## Installation
 
@@ -22,58 +22,35 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 ```
 Interactive Elixir (1.1.1) - press Ctrl+C to exit (type h() ENTER for help)
-iex(1)> g = Graph.new!
-#PID<0.116.0>
-
-iex(2)> Graph.add_vertex g, :a, %{name: "Arthur Colle"}
-:a
-
-iex(3)> Graph.add_vertex g, :m, %{name: "Martina Miller"}
-:m
-
-iex(4)> Graph.vertices g
-[:m, :a]
-
-iex(5)> Graph.add_edge(g, :edge1, :a, :m, %{status: "Met Once"})
-:edge1
-
-iex(6)> Graph.show g
-{:m, %{name: "Martina Miller"}}
-{:a, %{name: "Arthur Colle"}}
-{:edge1, :a, :m, %{status: "Met Once"}}
-```
-
-More usage:
-
-```
 iex(1)> graph = Graph.new!
 #PID<0.95.0>
-iex(2)> graph |> Graph.add_vertex 1, %{data: "arthur colle"}
+iex(2)> Graph.add_vertex( graph, 1, %{data: "arthur colle"} )
 1
-iex(3)> graph |> Graph.add_vertex 2, %{data: "sophie colle"}
+iex(3)> Graph.add_vertex( graph, 2, %{data: "sophie colle"} )
 2
-iex(4)> graph |> Graph.vertices
+iex(4)> Graph.vertices( graph )
 [1, 2]
-iex(5)> graph |> Graph.show
+iex(5)> Graph.show( graph )
 {1, %{data: "arthur colle"}}
 {2, %{data: "sophie colle"}}
 :ok
-iex(6)> Graph.edges(graph)
+iex(6)> Graph.edges( graph )
 []
-iex(7)> Graph.add_edge(graph, :a, 1, 2, %{relationship: :siblings})
+iex(7)> Graph.add_edge( graph, :a, 1, 2, %{relationship: :siblings} )
 :a
 
-iex(8)> Graph.edge! graph, :a
+iex(8)> Graph.edge!( graph, :a )
 %{relationship: :siblings}
 
-iex(5)> Graph.show graph
+iex(5)> Graph.show( graph )
 {1, %{data: "arthur colle"}}
 {2, %{data: "sophie colle"}}
 %{relationship: :siblings}
 
 ```
 
-To do from `:digraph_utils`:
+#To do from `:digraph_utils`:
+
 ```
 arborescence_root/1           components/1
 condensation/1                cyclic_strong_components/1
@@ -87,14 +64,7 @@ strong_components/1           subgraph/2
 subgraph/3                    topsort/1
 ```
 
-To do from `:digraph`:
-
-~~`add_edge/3`~~           ~~`add_edge/4`~~           ~~`add_edge/5`~~ 
-
-~~`add_vertex/1`~~         ~~`add_vertex/2`~~         ~~`add_vertex/3`~~
-
-~~`edges/1`~~
-
+#To do from `:digraph`:
 ```
 del_edge/2           del_edges/2          del_path/3
 del_vertex/2         del_vertices/2       delete/1
@@ -106,4 +76,74 @@ module_info/1        new/0                new/1
 no_edges/1           no_vertices/1        out_degree/2
 out_edges/2          out_neighbours/2     sink_vertices/1
 source_vertices/1    vertex/2             vertices/1
+```
+#Done from `:digraph`:
+~~`add_edge/3`~~           
+~~`add_edge/4`~~           
+~~`add_edge/5`~~ 
+
+~~`add_vertex/1`~~         
+~~`add_vertex/2`~~         
+~~`add_vertex/3`~~
+
+~~`edges/1`~~
+
+# Info for maintainers:
+
+## :digraph module functions
+```
+add_edge(G, V1, V2) -> edge() | {error, add_edge_err_rsn()}
+add_edge(G, V1, V2, Label) -> edge() | {error, add_edge_err_rsn()}
+add_edge(G, E, V1, V2, Label) -> edge() | {error, add_edge_err_rsn()}
+add_vertex(G) -> vertex()
+add_vertex(G, V) -> vertex()
+add_vertex(G, V, Label) -> vertex()
+del_edge(G, E) -> true
+del_edges(G, Edges) -> true
+del_path(G, V1, V2) -> true
+del_vertex(G, V) -> true
+del_vertices(G, Vertices) -> true
+delete(G) -> true
+edge(G, E) -> {E, V1, V2, Label} | false
+edges(G) -> Edges
+edges(G, V) -> Edges
+get_cycle(G, V) -> Vertices | false
+get_path(G, V1, V2) -> Vertices | false
+get_short_cycle(G, V) -> Vertices | false
+get_short_path(G, V1, V2) -> Vertices | false
+in_degree(G, V) -> integer() >= 0
+in_edges(G, V) -> Edges
+in_neighbours(G, V) -> Vertex
+info(G) -> InfoList
+new() -> graph()
+new(Type) -> graph()
+no_edges(G) -> integer() >= 0
+no_vertices(G) -> integer() >= 0
+out_degree(G, V) -> integer() >= 0
+out_edges(G, V) -> Edges
+out_neighbours(G, V) -> Vertices
+vertex(G, V) -> {V, Label} | false
+vertices(G) -> Vertices
+```
+
+## :digraph_utils module functions
+```
+arborescence_root(Digraph) -> no | {yes, Root}
+components(Digraph) -> [Component]
+condensation(Digraph) -> CondensedDigraph
+cyclic_strong_components(Digraph) -> [StrongComponent]
+is_acyclic(Digraph) -> boolean()
+is_arborescence(Digraph) -> boolean()
+is_tree(Digraph) -> boolean()
+loop_vertices(Digraph) -> Vertices
+postorder(Digraph) -> Vertices
+preorder(Digraph) -> Vertices
+reachable(Vertices, Digraph) -> Reachable
+reachable_neighbours(Vertices, Digraph) -> Reachable
+reaching(Vertices, Digraph) -> Reaching
+reaching_neighbours(Vertices, Digraph) -> Reaching
+strong_components(Digraph) -> [StrongComponent]
+subgraph(Digraph, Vertices) -> SubGraph
+subgraph(Digraph, Vertices, Options) -> SubGraph
+topsort(Digraph) -> Vertices | false
 ```

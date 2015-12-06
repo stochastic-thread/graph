@@ -117,9 +117,19 @@ defmodule Graph do
   ############ Other functions #######################################
   def show( g ) do
     Enum.each(Graph.vertices( g ), 
-      fn( v ) -> IO.inspect Graph.vertex( g, v ) end )
-
+      fn( v ) -> 
+        IO.inspect Graph.vertex( g, v ) 
+      end )
     Enum.each(Graph.edges( g ), 
-      fn( e ) -> IO.inspect Graph.edge( g, e ) end )
+      fn( e ) -> 
+        IO.inspect Graph.edge( g, e ) 
+      end )
   end
+
+  def get!( graph_pid ) do
+    Agent.get( graph_pid, 
+      fn( graph ) -> graph 
+    end )
+  end
+
 end

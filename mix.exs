@@ -27,6 +27,8 @@ defmodule Graph.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:blocking_queue, "~> 1.0.0"}   # joekain/BlockingQueue
+    ]
   end
 end
