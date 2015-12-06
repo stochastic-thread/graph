@@ -3,14 +3,15 @@ defmodule Graph do
   ############ Private functions ##############################
 
   defp init do
+    :mnesia.start()
     Agent.start_link( fn -> 
-      :digraph.new 
+      :mdigraph.new 
     end )
   end
   
   ############ Public functions ###############################
 
-  # new/0   - client creates an Agent holding a :digraph
+  # new/0   - client creates an Agent holding a :mdigraph
   # 
   # notes - use when you need to catch errors, e.g. by 
   #					matching on `{response_code, pid} = Graph.new`
@@ -41,7 +42,7 @@ defmodule Graph do
 
   def vertex( graph_pid, key ) do
     Agent.get( graph_pid, fn graph -> 
-      :digraph.vertex( graph, key ) 
+      :mdigraph.vertex( graph, key ) 
     end )
   end
 
@@ -49,7 +50,7 @@ defmodule Graph do
   def vertex!( graph_pid, key ) do
     Agent.get( graph_pid, 
       fn graph ->
-        {_x, y} = :digraph.vertex( graph, key ) 
+        {_x, y} = :mdigraph.vertex( graph, key ) 
         y
       end 
     )
@@ -57,25 +58,25 @@ defmodule Graph do
 
   def add_vertex( graph_pid ) do
     Agent.get( graph_pid, fn graph -> 
-      :digraph.add_vertex( graph ) 
+      :mdigraph.add_vertex( graph ) 
     end )
   end
 
   def add_vertex( graph_pid, key ) do
     Agent.get( graph_pid, fn graph -> 
-      :digraph.add_vertex( graph, key ) 
+      :mdigraph.add_vertex( graph, key ) 
     end )
   end
 	
   def add_vertex( graph_pid, key, value ) do
     Agent.get( graph_pid, fn graph -> 
-      :digraph.add_vertex( graph, key, value ) 
+      :mdigraph.add_vertex( graph, key, value ) 
     end )
   end
 	
   def vertices( graph_pid ) do
     Agent.get( graph_pid, fn graph -> 
-      :digraph.vertices( graph ) 
+      :mdigraph.vertices( graph ) 
     end )
   end
 
@@ -83,14 +84,14 @@ defmodule Graph do
 
   def edge( graph_pid, key ) do
     Agent.get( graph_pid, fn graph -> 
-      :digraph.edge( graph, key ) 
+      :mdigraph.edge( graph, key ) 
     end )
   end
 
   def edge!( graph_pid, key ) do
     Agent.get( graph_pid, 
       fn graph ->
-        case :digraph.edge( graph, key ) do
+        case :mdigraph.edge( graph, key ) do
           {x, y} -> y
           tuple -> 
             tuple 
@@ -103,13 +104,13 @@ defmodule Graph do
 	
   def add_edge( graph_pid, edge_k, v1_k, v2_k, edge_v ) do
     Agent.get( graph_pid, fn( graph ) -> 
-      :digraph.add_edge( graph, edge_k, v1_k, v2_k, edge_v ) 
+      :mdigraph.add_edge( graph, edge_k, v1_k, v2_k, edge_v ) 
     end )
   end
 	
   def edges( graph_pid ) do
     Agent.get( graph_pid, fn( graph ) -> 
-      :digraph.edges( graph ) 
+      :mdigraph.edges( graph ) 
     end )
   end
 
@@ -136,20 +137,20 @@ defmodule Graph do
     # A --> D
     # A --> B --> C --> A
     # D --> E --> F --> D
-    graph = :digraph.new
-    :digraph.add_vertex graph, :a, 1
-    :digraph.add_vertex graph, :b, 2
-    :digraph.add_vertex graph, :c, 3
-    :digraph.add_vertex graph, :d, 4
-    :digraph.add_vertex graph, :e, 5
-    :digraph.add_vertex graph, :f, 6
-    :digraph.add_edge graph, :ab, :a, :b, "AB"
-    :digraph.add_edge graph, :bc, :b, :c, "BC"
-    :digraph.add_edge graph, :ca, :c, :a, "CA"
-    :digraph.add_edge graph, :de, :d, :e, "DE"
-    :digraph.add_edge graph, :ef, :e, :f, "EF"
-    :digraph.add_edge graph, :fd, :f, :d, "FD"
-    :digraph.add_edge graph, :ad, :a, :d, "AD"    
+    graph = :mdigraph.new
+    :mdigraph.add_vertex graph, :a, 1
+    :mdigraph.add_vertex graph, :b, 2
+    :mdigraph.add_vertex graph, :c, 3
+    :mdigraph.add_vertex graph, :d, 4
+    :mdigraph.add_vertex graph, :e, 5
+    :mdigraph.add_vertex graph, :f, 6
+    :mdigraph.add_edge graph, :ab, :a, :b, "AB"
+    :mdigraph.add_edge graph, :bc, :b, :c, "BC"
+    :mdigraph.add_edge graph, :ca, :c, :a, "CA"
+    :mdigraph.add_edge graph, :de, :d, :e, "DE"
+    :mdigraph.add_edge graph, :ef, :e, :f, "EF"
+    :mdigraph.add_edge graph, :fd, :f, :d, "FD"
+    :mdigraph.add_edge graph, :ad, :a, :d, "AD"    
     graph
   end
 

@@ -5,6 +5,7 @@ defmodule Graph.Mixfile do
     [app: :graph,
      version: "0.0.1",
      elixir: "~> 1.1",
+     erlc_paths: ["core"],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
