@@ -24,8 +24,7 @@ defmodule Graph do
     end
   end
 
-
-	# new!/0 - get the pid directly and not a status tuple
+  # new!/0 - get the pid directly and not a status tuple
 
   def new! do
     case init() do
@@ -103,7 +102,7 @@ defmodule Graph do
   def show( g ) do
     Enum.each(Graph.vertices( g ), 
       fn( v ) -> IO.inspect Graph.vertex( g, v ) end )
-    
+
     Enum.each(Graph.edges( g ), 
       fn( e ) -> IO.inspect Graph.edge( g, e ) end )
   end
