@@ -137,6 +137,7 @@ defmodule Graph do
     # A --> D
     # A --> B --> C --> A
     # D --> E --> F --> D
+    :mnesia.start
     graph = :mdigraph.new
     :mdigraph.add_vertex graph, :a, 1
     :mdigraph.add_vertex graph, :b, 2
