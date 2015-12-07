@@ -3,7 +3,6 @@ defmodule Graph do
   ############ Private functions ##############################
 
   defp init do
-    :mnesia.start()
     Agent.start_link( fn -> 
       :mdigraph.new 
     end )
@@ -137,7 +136,6 @@ defmodule Graph do
     # A --> D
     # A --> B --> C --> A
     # D --> E --> F --> D
-    :mnesia.start
     graph = :mdigraph.new
     :mdigraph.add_vertex graph, :a, 1
     :mdigraph.add_vertex graph, :b, 2
@@ -151,8 +149,9 @@ defmodule Graph do
     :mdigraph.add_edge graph, :de, :d, :e, "DE"
     :mdigraph.add_edge graph, :ef, :e, :f, "EF"
     :mdigraph.add_edge graph, :fd, :f, :d, "FD"
-    :mdigraph.add_edge graph, :ad, :a, :d, "AD"    
-    graph
+    :mdigraph.add_edge graph, :ad, :a, :d, "AD"  
+    {:ok, hello} = Agent.start_link fn -> graph end
+    hello
   end
 
 end

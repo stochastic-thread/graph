@@ -15,7 +15,7 @@ defmodule Graph.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :amnesia, :blocking_queue]]
   end
 
   # Dependencies can be Hex packages:
@@ -29,7 +29,8 @@ defmodule Graph.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:blocking_queue, "~> 1.0.0"}   # joekain/BlockingQueue
+      {:blocking_queue, "~> 1.0.0"},   # joekain/BlockingQueue
+      {:amnesia, [git: "https://github.com/meh/amnesia"]}
     ]
   end
 end

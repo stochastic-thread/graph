@@ -1,1 +1,3 @@
-%{"blocking_queue": {:hex, :blocking_queue, "1.0.6"}}
+%{"amnesia": {:git, "https://github.com/meh/amnesia", "d0524ae81e07eb94d56e8a34540420b13178df09", []},
+  "blocking_queue": {:hex, :blocking_queue, "1.0.6"},
+  "exquisite": {:hex, :exquisite, "0.1.5"}}
